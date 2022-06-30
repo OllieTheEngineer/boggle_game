@@ -1,13 +1,13 @@
 from flask import Flask, request, render_template, session, jsonify
 from boggle import Boggle
-from flask_debugtoolbar import DebugToolbarExtension
+# from flask_debugtoolbar import DebugToolbar
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "BOOGIE"
-app.debug = True
+# app.debug = True
 
 boggle_game = Boggle()
-debug = DebugToolbarExtension(app)
+# debug = DebugToolbar(app)
 
 @app.route("/")
 def home():
@@ -32,3 +32,14 @@ def check():
 
     return jsonify({'result': response})
 
+@app.route("/score", methods=["POST"])
+def score():
+
+    score = request.json["score"]
+    highscore = session.get("highscore", 0)
+    plays = session.get("plays", 0)
+
+    session['plays'] = plays + 1
+    session['highscore'] = max(score, highscore)
+
+    return jsonify(brokeRecord=score > highscore)

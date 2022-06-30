@@ -24,11 +24,25 @@
             {{ Highscore}}
             in {{ nplays }} plays
          </p>
-
          <p>
             Score: <stan class="score">0</stan>
             Seconds Left: <stan class="timer"></stan>
          </p>
+
+         <form method="POST" class="new-word">
+            <input type="text" name="word" class="word">
+            <button class="btn">Submit</button>
+         </form>
+
+         <p class="msg">
+
+         </p>
+
+         <ul class="words">
+
+         </ul>
     </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/static/boggle.js"></script>
 </body>
 </html>
